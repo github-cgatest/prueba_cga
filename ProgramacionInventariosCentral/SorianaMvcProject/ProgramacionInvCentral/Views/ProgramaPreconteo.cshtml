@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "ProgramaPreconteo";
+    Layout = "~/Shared/Views/_Layoutsinmenu.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <br />
+                        <h2 style="margin-top: 5px;">
+                            <a href="@Url.Action("Index", "Menu")" class="btn btn-default btn-circle btn-lg"><i class="fa fa-reply"></i></a> Programa Preconteo
+                        </h2>
+                        <div class="panel panel-default" style="padding-left: 10px;padding-right:10px;">
+                            <div class="row" style="padding-top:10px">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Tipo Inventario: </label>
+                                    <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                                        <select class="form-control">
+                                            <option value="volvo">Preconteo</option>
+                                            <option value="saab">Mensual</option>
+                                            <option value="mercedes">General</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Año: </label>
+                                    <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                                        <select class="form-control">
+                                            <option value="volvo">2018</option>
+                                            <option value="saab">2019</option>
+                                            <option value="mercedes">2020</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Consecutivo: </label>
+                                    <div class="form-group">
+                                        @Html.TextBox("txt", null, new { @class = "form-control", @placeholder = "", @style = "padding-left: 25px;padding-right: 25px;margin-left:9%" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-top:10px">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Fecha Inicial: </label>
+                                    <div class="input-group date" style="padding-left: 25px;padding-right: 25px;">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="txtFechaInicial" class="form-control" disabled="disabled" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Fecha Final: </label>
+                                    <div class="input-group date" style="padding-left: 25px;padding-right: 25px;">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="txtFechaFinal" class="form-control" disabled="disabled" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Alcance: </label>
+                                    <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                                        <select class="form-control">
+                                            <option value="volvo">Departamento</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-top:10px">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <br />
+                                    @Html.RadioButton("Opc_IndicaConsiderax", "1", true, new { id = "IndicaConsiderax1", @style = "padding-left: 25px;padding-right: 25px;margin-left: 9%;" })<label> Grupo </label>
+                                    <br />
+                                    @Html.RadioButton("Opc_IndicaConsiderax", "2", false, new { id = "IndicaConsiderax2", @style = "padding-left: 25px;padding-right: 25px;margin-left: 9%;" })<label> Plaza </label>
+                                    <br />
+                                    @Html.RadioButton("Opc_IndicaConsiderax", "3", false, new { id = "IndicaConsiderax3", @style = "padding-left: 25px;padding-right: 25px;margin-left: 9%;" })<label> Todas </label>
+                                </div>
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <br />
+                                    <label style="padding-left: 25px;padding-right: 25px;">Grupo: </label>
+                                    <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                                        <select class="form-control">
+                                            <option value="volvo">CENTRO COMERCIAL</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                    <br />
+                                    <a class="btn btn-danger" style="margin-left: 40%;margin-top: 20%;" href="javascript: Grabar();" target="_self"><i class="fa fa-print"></i> Grabar</a>
+                                </div>
+                            </div>
+
+                            <div class="row" id="dualListFolios" style="margin-left:1%;margin-top:1%;">
+                                <div class="dual-list list-left col-md-5">
+                                    <div class="well text-right">
+                                        <div class="row">
+                                            <div class="col-md-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon fa fa-search"></span>
+                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-default selector" title="select all"><i class="fa fa-square-o"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul id="listFolios" class="list-group">
+
+                                            <li class="list-group-item">1 SANTO DOMINGO</li>
+                                            <li class="list-group-item">2 SAN ISIDRO</li>
+                                            <li class="list-group-item">4 ORIENTE</li>
+                                            <li class="list-group-item">5 VALLARTA</li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="list-arrows col-md-1 text-center">
+                                    <button class="btn btn-default btn-sm move-left" onclick="return false;">
+                                        <span class="fa fa-angle-left"></span>
+                                    </button>
+                                    <button class="btn btn-default btn-sm move-right" onclick="return false;">
+                                        <span class="fa fa-angle-right"></span>
+                                    </button>
+                                </div>
+                                <div class="dual-list list-right col-md-5">
+                                    <div class="well">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="btn-group">
+                                                    <a class="btn btn-default selector" title="select all"><i class="fa fa-square-o"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="input-group">
+                                                    <input type="text" name="SearchDualList" class="form-control" placeholder="search" />
+                                                    <span class="input-group-addon  fa fa-search"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul id="listSelected" class="list-group"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/plugins/flot")
+    @Scripts.Render("~/plugins/chartJs")
+    @Scripts.Render("~/plugins/peity")
+    @Scripts.Render("~/plugins/dataTables")
+    @Styles.Render("~/plugins/clockpickerStyles")
+    @Styles.Render("~/plugins/datapickerStyles")
+    @Scripts.Render("~/plugins/dataPicker")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".date").datepicker('setDate', new Date());
+
+        });
+
+    </script>
+
+    <script>
+        $('.date').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            calendarWeeks: true,
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+            //,startDate: "dateToday"
+        });
+    </script>
+
+}

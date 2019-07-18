@@ -1,0 +1,200 @@
+﻿
+
+@{
+    Layout = "~/Shared/Views/_Layoutsinmenu.cshtml";
+    var flgModal = "alert('Mensaje 1')";
+}
+
+@using (Html.BeginForm("UploadFile", "ProgramacionInvCentral", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row wrapper border-bottom white-bg page-heading">
+
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox-content">
+                    <h2 style="margin-top: 5px;">
+                        <a href="@Url.Action("Index", "Menu")" class="btn btn-default btn-circle btn-lg"><i class="fa fa-reply"></i></a> @TempData["PageTitle"]
+                    </h2>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row" style="padding-top:10px">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <label style="padding-left: 25px;padding-right: 25px;">Tipo Inventario: </label>
+                <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                    @ViewData["titulo"]
+                    @*<select class="form-control" disabled>
+                            <option value="pre">Preconteo</option>
+                            <option value="men">Mensual</option>
+                            <option value="gen">General</option>
+                        </select>*@
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top:10px">
+            <div class="col-xs-3">
+                @using (Html.BeginForm("UploadFile", "Programacion", new { vista = "Index" }, FormMethod.Post, new { enctype = "multipart/form-data", @id = "form" }))
+                {
+                    @Html.Raw(ViewBag.Error)
+                    <input type="button" class="btn btn-lg btn-danger fa fa-search" onclick="document.getElementById('fileInput').click();" value="CARGAR ARCHIVO" />
+                    <input id="fileInput" type="file" name="excelfile" accept=".csv" style="display:none;" />
+                    <input type="submit" id="import" style="display:none;" />
+
+                }
+            </div>
+            <div class="col-xs-3">
+                <button id="btnValidar" type="button" class="btn btn-lg btn-danger fa fa-check" disabled> VALIDAR ARCHIVO</button>
+            </div>
+            <div class="col-xs-3">
+                <button type="button" class="btn btn-lg btn-danger fa fa-save" disabled> GUARDAR</button>
+            </div>
+        </div>
+
+        <br />
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tienda</th>
+                                <th>Nombre</th>
+                                <th>Formato</th>
+                                <th>Tipo de Inventario</th>
+                                <th>PROVEEDOR</th>
+                                <th>CATEGORÍA</th>
+                                <th>LINEA</th>
+                                <th>CODIGO</th>
+                                <th>Frecuencia de inventario</th>
+                                <th>Fecha Inicial</th>
+                                <th>Fecha Fin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*<tr>
+                                    <td>12</td>
+                                    <td>San Nicolás</td>
+                                    <td>Híper</td>
+                                    <td>ROT</td>
+                                    <td>5462</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>SEM</td>
+                                    <td>3/6/2019</td>
+                                    <td>9/2/2019</td>
+                                </tr>*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="modal-form" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Modal body text goes here.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+
+
+
+@section Scripts {
+
+
+    <script type="text/javascript">
+
+        document.getElementById("fileInput").onchange = function () {
+
+            if (document.getElementById("fileInput").value != "") {
+                document.getElementById('import').click();
+               
+             //   CargarExcel();
+            }
+        };
+
+
+        function CargarExcel() {
+            debugger;
+            var data = new FormData();
+           
+            $.each(jQuery('#fileInput')[0].files, function (i, file) {
+                data.append('file-' + i, file);
+            });
+            $.ajax({
+                url: "@Url.Action("UploadFile", "Programacion")",
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function (data) {
+                    alert("");
+                    $("#btnBuscar").prop('disabled', false);
+                }
+            });
+        }
+
+
+
+        $(document).ready(function () {
+
+
+            //$('#myModalExito').modal('hide'); // cerrar
+
+            @*@{
+                if (TempData["MsgError"] != null)
+                {
+                    flgModal = TempData["MsgError"].ToString();
+                    if (TempData["MsgError"].ToString() != "")
+                    {
+
+                        flgModal = "$(\'#modal-form\').modal(\'show\')";
+                    }
+                }
+                else
+                { flgModal = "alert(\'No hay errores\')"; }
+            }*@
+
+            debugger;
+
+
+            @*eval(@flgModal.Replace("&#39","'"));*@
+
+            @*if (@TempData["MsgError"]!="") {
+
+
+            }*@
+
+
+        });
+    </script>
+}

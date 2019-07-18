@@ -1,0 +1,54 @@
+﻿<div class="row border-bottom white-bg">
+    <nav class="navbar navbar-static-top" role="navigation">
+        <div class="navbar-header" style="width:100%;">
+            <table id="TitleHeader" style="width:100%;">
+                <tr>
+                    <td style="width:14%;padding-left:7px;padding-TOP:5px;">
+                        <a href=@Session["urlLogin"]><img src="~/Images/SORIANA_OFICIAL.png" style="width:150px;" /></a></td>
+                    <td style="font-size:30px;text-align:center">
+                        |
+                    </td>
+                    <td style="padding-top:7px;padding-left:7px;text-align:left;color:white;font-weight:600">
+                        @Session["Tienda"]
+                    </td>
+                    <td style="padding-top:9px;text-align:right;color:white;font-weight:600;">
+                        <span id="sNameUser">@Session["sNombre"]</span><br />
+                        <span id="sProfileUser">@Session["Profile"]</span>
+                    </td>
+                    <td style="font-size:30px;text-align:right">
+                        |
+                    </td>
+                    <td style="width:9%;padding-top:8px;text-align:center;color:white;font-weight:600;cursor:pointer;">
+                        <span id="lblLogOut"> Cerrar Sesión </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </nav>
+</div>
+<div class="row" style="height:50px;">
+    <div class="col-sm-3" style="padding-top:10px;">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Opción</span>
+            <input type="text" class="form-control" id="optionSelected" title="Selecciona una opción del menú" name="optionSelected" onkeydown="optionSelected_onkeydown(event)" aria-describedby="basic-addon1">
+        </div>
+    </div>
+    <div class="col-sm-5" style="padding-top:10px;padding-left:50px">
+        <center style="font-size:20px;font-weight:bolder">
+            @Session["App"]
+        </center>
+    </div>
+    <div class="col-sm-1">
+    </div>
+</div>
+@*@TempData["ErrorLogin"]*@
+
+@Scripts.Render(@Url.Content("~/bundles/jquery"))
+
+<script>
+
+    $("#lblLogOut").click(function () {
+        window.location = '@Url.Action("logOut", "Menu")';
+    });
+
+</script>

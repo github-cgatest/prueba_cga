@@ -1,0 +1,218 @@
+﻿
+@{
+    //ViewBag.Title = "ProgramaInventarioo";
+    Layout = "~/Shared/Views/_Layoutsinmenu.cshtml";
+}
+
+<style>
+    .l {
+        font-family: sans-serif;
+        /*font-size: 11px;*/
+    }
+</style>
+
+@using (Html.BeginForm("UploadFile", "ProgramacionInvCentral", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <h2 style="margin-top: 5px;">
+                                <a href="@Url.Action("Index", "Menu")" class="btn btn-default btn-circle btn-lg"><i class="fa fa-reply"></i></a> PI11.-Programación Inventarios Generales y Mensual
+                            </h2>
+
+                            <div class="panel panel-default" style="padding-left: 10px;padding-right:10px;">
+                                <br />
+                                <div class="row">
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        <label style="padding-left: 25px;padding-right: 25px;">Tipo Inventario: </label>
+                                        @*@Html.Raw(ViewBag.Error)*@
+                                        <div class="" style="padding-left: 25px;padding-right: 25px;">
+                                            <a class="btn btn-lg btn-danger fa fa-file-text" id="btnCA" onclick="document.getElementById('fileInput').click();">&nbsp;CARGAR ARCHIVO</a>
+                                            <input id="fileInput" type="file" name="excelfile" accept=".csv" style="display:none;" />
+                                            <input type="submit" id="import" formaction="ProgramaInventarioGM" style="display:none;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3 ">
+                                        <label style="padding-left: 25px;padding-right: 25px;">&nbsp;</label>
+                                        <div class="" style="padding-left: 25px;padding-right: 25px;">
+                                            <button id="btnValidar" type="button" onclick="ValidarArchivoGen()" class="btn btn-lg btn-danger fa fa-check" @ViewBag.BtnValidar> VALIDAR ARCHIVO</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        <label style="padding-left: 25px;padding-right: 25px;">&nbsp;</label>
+                                        <div class="" style="padding-left: 25px;padding-right: 25px;">
+                                            <button id="btnGuardar" type="button" onclick="GuardarArchivoGen()" class="btn btn-lg btn-danger fa fa-save" disabled> GUARDAR</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="dualListFolios" style="margin-left:1%; margin-right:1%;">
+                                    <div class="row" id="gridFolios">
+                                        <br />
+                                        <div class="col-sm-12 col-md-12 col-lg-12 ">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 table-responsive">
+
+                                                <table id="tablaInvs" class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center small">Tienda</th>
+                                                            <th class="text-center small">Nombre de la Tienda</th>
+                                                            <th class="text-center small">Formato</th>
+                                                            <th class="text-center small">Tipo de Inventario</th>
+                                                            <th class="text-center small">Alcance</th>
+                                                            <th class="text-center small">Fecha Inicio 1</th>
+                                                            <th class="text-center small">Fecha Fin 1</th>
+                                                            <th class="text-center small">Fecha Inicio 2</th>
+                                                            <th class="text-center small">Fecha Fin 2</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        @foreach (var item in ViewBag.ListProducts)
+                                                        {
+                                                            <tr>
+                                                                <td style="text-align:center"><label class="label label-default l" style="background-color:inherit;">@item.Ids_Num_Un</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Desc_UN</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Desc_Form</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Desc_Tipo_Inv</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Desc_Tipo_Alc</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Fecx_IniInv</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Fecx_FinInv</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Fecx_IniInv2</label></td>
+                                                                <td><label class="label label-default l" style="background-color:inherit;">@item.Fecx_FinInv2</label></td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="modalMensajeAlert" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="MensajeAlertTitle"> ERROR </h2>
+            </div>
+            <div class="modal-body">
+                <h4 id="MensajeAlertMessage">  </h4>
+                <br />
+                @ViewBag.ListaErrores
+                <center>
+                    <button type="button" data-dismiss="modal" id="cmdOKApertura" class="btn btn-success"> <i class="glyphicon glyphicon-ok"></i> Aceptar </button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/plugins/flot")
+    @Scripts.Render("~/plugins/chartJs")
+    @Scripts.Render("~/plugins/peity")
+    @Scripts.Render("~/plugins/dataTables")
+    @Styles.Render("~/plugins/dataTablesStyles")
+    @Styles.Render("~/plugins/clockpickerStyles")
+    @Styles.Render("~/plugins/datapickerStyles")
+    @Scripts.Render("~/plugins/dataPicker")
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            Estilo_TablaInvs();
+        });
+
+        document.getElementById("fileInput").onchange = function () {
+
+            if (document.getElementById("fileInput").value != "") {
+                
+                document.getElementById('import').click();
+                //CargarExcel();
+            }
+        };
+
+        function ValidarArchivoGen() {
+     
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                datatype: 'html',
+                url: '@Url.Action("ValidaArchivoGeneral", "ProgramacionInvCentral")',
+                data: {},
+                success: function (data) {
+                    if (data.Success) {
+                        showModal(data.Message, '', 'modalMensajeAlert', 'MensajeAlertMessage', 'MensajeAlertTitle');
+                        $("#btnGuardar").attr("disabled", false);
+                    }
+                    else {
+                        //bootbox.alert(data.Message);
+                        showModal(data.Message, 'Error', 'modalMensajeAlert', 'MensajeAlertMessage', 'MensajeAlertTitle');
+                    }
+                },
+
+                error: function (jqXHR, textStatus, errorThrown) {
+                    bootbox.alert(errorThrown);
+                }
+            });
+        }
+
+
+        function showModal(message, title, id, IdLabelMsg, idLabelTitle) {
+            document.getElementById(IdLabelMsg).innerHTML = message;
+            document.getElementById(idLabelTitle).innerHTML = title;
+            $("#" + id).modal();
+        }
+
+        function GuardarArchivoGen() {
+
+            $.ajax({
+                type: 'POST',
+                cache: false,
+                datatype: 'html',
+                url: '@Url.Action("GuardarInventarioGeneral", "ProgramacionInvCentral")',
+                data: {},
+                success: function (data) {
+                    if (data.Success) {
+                        //bootbox.alert(data.Message);
+                        showModal(data.Message, '', 'modalMensajeAlert', 'MensajeAlertMessage', 'MensajeAlertTitle');
+                    }
+                    else {
+                        //bootbox.alert(data.Message);
+                        showModal(data.Message, 'Error', 'modalMensajeAlert', 'MensajeAlertMessage', 'MensajeAlertTitle');
+                    }
+                },
+
+                error: function (jqXHR, textStatus, errorThrown) {
+                    bootbox.alert(errorThrown);
+                }
+            });
+        }
+
+        var TablaInvs;
+        function Estilo_TablaInvs() {
+            TablaInvs = $('#tablaInvs').DataTable(
+            {
+                //Pagelength: 50,
+                //"dom": 'Bfrtip',
+                //"dom": '<rf<t>ip>',
+                'bdestroy': true,
+                language: {
+                    "url": "../Scripts/plugins/JQDatatablesNew/Spanish.json"
+                }
+            });
+        }
+    </script>
+
+}

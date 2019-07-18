@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Shared/Views/_Layout_2.cshtml";
+}
+
+<div class="middle-box text-center animated fadeInDown">
+    <h1>404</h1>
+    <h3 class="font-bold">Página No Encontrada</h3>
+
+    <div class="error-desc">
+        Lo sentimos, la pásgina que esta buscando no ha sido encontrada compruebe la URL, entonces presione el boton refrescar.
+        <form class="form-inline m-t" role="form">
+            <div class="form-group">
+                @*<input type="text" class="form-control" placeholder="Search for page">*@
+                <h5>
+                    <a href="@ViewBag.Server" class="btn btn-default btn-circle btn-lg"><i class="fa fa-reply"></i></a>
+                    Ir al Inicio <small></small>
+                </h5>
+            </div>
+            @*<button type="submit" class="btn btn-primary">Search</button>*@
+        </form>
+    </div>
+</div>
+

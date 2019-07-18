@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC04A1EF-53DF-42A4-A629-267D6ABF1E67}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NGSorianaMvcProject</RootNamespace>
+    <AssemblyName>NGSorianaMvcProject</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Soriana.FWK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dll_Enterprise\Soriana.FWK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ProgramacionInvCentral\NGProgramacionInvCentral.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dll_Enterprise\cinetkit.dll" />
+    <Content Include="Dll_Enterprise\FrameworkToolsDevelopment.dll" />
+    <Content Include="Dll_Enterprise\log4net.dll" />
+    <Content Include="Dll_Enterprise\log4net.xml" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.Caching.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.Common.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.Data.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.Logging.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.PolicyInjection.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.EnterpriseLibrary.Security.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.ServiceLocation.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.Unity.Configuration.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.Unity.dll" />
+    <Content Include="Dll_Enterprise\Microsoft.Practices.Unity.Interception.dll" />
+    <Content Include="Dll_Enterprise\Newtonsoft.Json.dll" />
+    <Content Include="Dll_Enterprise\Newtonsoft.Json.xml" />
+    <Content Include="Dll_Enterprise\Senalizacion.dll" />
+    <Content Include="Dll_Enterprise\Soriana.FWK.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DTSorianaMvcProject\DTSorianaMvcProject.csproj">
+      <Project>{e8f1b97c-a329-4ea9-97fc-618216a0ee59}</Project>
+      <Name>DTSorianaMvcProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EDSorianaMvcProject\EDSorianaMvcProject.csproj">
+      <Project>{b3ffafe4-41f5-486e-9f4a-7d175aaeecee}</Project>
+      <Name>EDSorianaMvcProject</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

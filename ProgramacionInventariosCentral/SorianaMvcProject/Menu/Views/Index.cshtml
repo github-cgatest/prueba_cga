@@ -1,0 +1,175 @@
+﻿@{
+    Layout = "~/Shared/Views/_Layoutsinmenu.cshtml";
+}
+@Styles.Render("~/Content/css")
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-4">
+
+
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+</div>
+
+<div class="ibox-content">
+    <div class="panel-body">
+        <div class="panel-group" id="accordion">
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading collapsed" data-parent="#accordion" data-toggle="collapse" data-target="#op79" aria-expanded="false">
+                    <h4 class="panel-title accordion-toggle">
+                        SE1 Programación Inventarios
+                    </h4>
+                </div>
+                <div id="op79" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="panel-body">
+                        <div class="row">
+                            @*<div class="col-sm-3 col-md-3 col-lg-3" onclick="" style="cursor:pointer;">
+                                <a href="@Url.Action("ProgramaInventario", "ProgramacionInvCentral")" id="lnkNuevoApartado">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+
+
+                                            <div class="col-xs-9 text-left vertical-align top">
+                                                <h3>
+                                                    <span style="color:white;font-size:15px">PI11.-Programacion Inventarios Mensuales</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>*@
+                            <div class="col-sm-3 col-md-3 col-lg-3" onclick="" style="cursor:pointer;">
+                                <a href="@Url.Action("ProgramaInventarioGM", "ProgramacionInvCentral")" id="lnkNuevoApartado">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+
+
+                                            <div class="col-xs-9 text-left vertical-align top">
+                                                <h3>
+                                                    <span style="color:white;font-size:15px">PI11.-Programación Inventarios Generales y Mensuales</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-md-3 col-lg-3" onclick="" style="cursor:pointer;">
+                                <a href="@Url.Action("ProgramacionRotativo", "ProgramacionInvCentral")" id="lnkNuevoApartado">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+
+
+                                            <div class="col-xs-9 text-left vertical-align top">
+                                                <h3>
+                                                    <span style="color:white;font-size:15px">PI12.-Programación Inventarios Rotativos</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-3 col-md-3 col-lg-3" onclick="" style="cursor:pointer;">
+                                <a href="@Url.Action("ConsultaProgramacion", "ProgramacionInvCentral")" id="lnkNuevoApartado">
+                                    <div class="widget style1 navy-bg">
+                                        <div class="row">
+
+
+                                            <div class="col-xs-9 text-left vertical-align top">
+                                                <h3>
+                                                    <span style="color:white;font-size:15px">PI13.-Consulta Inventarios Programados</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            @*@{
+
+                    foreach (var menu in ViewBag.listMenu)
+                    {
+                        int index = 0;
+                        var idMenu = @menu.Id_Recurso;
+                        var colap = "#op" + @menu.Id_Recurso;
+                        var colap2 = "op" + @menu.Id_Recurso;
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading" data-parent="#accordion" data-toggle="collapse" data-target="@colap">
+                                <h4 class="panel-title accordion-toggle">
+                                    @menu.Nombre
+                                </h4>
+                            </div>
+
+                            <div id="@colap2" class="panel-collapse in">
+                                <div class="panel-body">
+                                    @foreach (var submenu in menu.subM)
+                                    {
+                                        string clas = "";
+                                        if ((index % 2) == 0)
+                                        {
+                                            clas = "widget style1 navy-bg";
+                                        }
+                                        else
+                                        {
+                                            clas = "widget style1 navy-bg-danger";
+                                        }
+
+
+                                        <div class="row">
+                                            @for (int ind = 0; ind < submenu.Value.Count; ind++)
+                                            {
+                                                var item = submenu.Value[ind];
+
+
+                                                <div class="col-sm-3 col-md-3 col-lg-3" onclick="location.href=@Url.Action(item.accion, item.controlador)" style="cursor:pointer;">
+                                                    <a href="@Url.Action(item.accion, item.controlador)" id="lnkNuevoApartado">
+                                                        <div class="@clas">
+                                                            <div class="row">
+
+
+                                                                <div class="col-xs-9 text-left vertical-align top">
+                                                                    <h3>
+                                                                        <span style="color:white;font-size:15px">@item.Nombre</span>
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+
+                                            }
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }*@
+            @*<br />*@
+
+
+
+        </div>
+    </div>
+
+</div>
+
+
+@*<script src="~/Scripts/angular.js"></script>*@

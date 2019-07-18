@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Shared/Views/_Layout_2.cshtml";
+}
+
+
+
+<div class="lock-word animated fadeInDown">
+    <span class="first-word">ACCESO</span><span>NEGADO</span>
+</div>
+<div class="middle-box text-center lockscreen animated fadeInDown">
+    <div>
+        <div class="m-b-md">
+            <img alt="image" class="img-circle circle-border" src="~/Images/Candado.jpg">
+        </div>
+        @*<h3>John Smith</h3>*@
+        <p>Perfil sin acceso a esta pagina. Para poder accesar de click en Cambiar Perfil</p>
+        <form class="m-t" role="form" action="index.html">
+            @*<div class="form-group">
+                    <input type="password" class="form-control" placeholder="******" required="">
+                </div>*@
+            @*<button type="submit" class="btn btn-primary block full-width">Unlock</button>*@
+            <h5>
+                <a href="@ViewBag.Server" class="btn btn-default btn-circle btn-lg"><i class="fa fa-reply"></i></a>
+                <a href="@ViewBag.Server" style="color:#87898A;">  Cambiar Perfil </a><small></small>
+            </h5>
+        </form>
+    </div>
+</div>
+

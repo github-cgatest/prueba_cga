@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMapNode>
+  <siteMapNode id="SistemaIyCP">
+    <siteMapNode id="Menu" title="Menu Igualacion" resourceKey="Igualacion" controller="Menu" action="Index" />
+    <siteMapNode id="IP1" title="Procesos" resourceKey="Igualacion" controller="Menu" action="Index">
+      <siteMapNode id="IP11" title="Folios Igualacion" resourceKey="Igualacion" controller="Procesos" action="FoliosIgualacion" />
+      <siteMapNode id="IP12" title="Cancelacion Folios Igualacion" resourceKey="Igualacion" controller="Procesos" action="CancelacionFoliosIgualacion" />
+      <siteMapNode id="IP13" title="Procesar Folios Rebaja Tecla" resourceKey="Igualacion" controller="Procesos" action="ProcesarFoliosRebajaTecla" />
+    </siteMapNode>
+    <siteMapNode id="IP2" title="Capturas" resourceKey="Igualacion" controller="Menu" action="Index">
+      <siteMapNode id="IP21" title="Igualaciones" resourceKey="Igualacion" controller="Capturas" action="Igualaciones" />
+      <siteMapNode id="IP22" title="Produccion Remate Saldos Ropa" resourceKey="Igualacion" controller="Capturas" action="ProdRemateSaldosRopa" />
+    </siteMapNode>
+    <siteMapNode id="IP3" title="Consultas" resourceKey="Igualacion" controller="Menu" action="Index">
+      <siteMapNode id="IP31" title="Rebajas" resourceKey="Igualacion" controller="Consultas" action="Rebajas" />
+    </siteMapNode>
+    <siteMapNode id="IP4" title="Reportes" resourceKey="Igualacion" controller="Menu" action="Index">
+      <siteMapNode id="IP41" title="Reportes Igualacion" resourceKey="Igualacion" controller="Reportes" action="Index" />
+    </siteMapNode>
+  </siteMapNode>
+  <siteMapNode id="Senalizacion">
+    <siteMapNode id="Menu" title="Menu Senalizacion" resourceKey="Senalizacion" controller="Menu" action="Index" />
+    <siteMapNode id="SE1" title="Captura" resourceKey="Senalizacion" controller="Menu" action="Index">
+      <siteMapNode id="SE11" title="Alta de Ubicación de Artículo" resourceKey="Senalizacion" controller="Etiquetas" action="AltaRegistro" />
+      <siteMapNode id="SE12" title="Etiquetas de Marcaje" resourceKey="Senalizacion" controller="Etiquetas" action="Marcaje" />
+      <siteMapNode id="SE13" title="Etiquetas por seleccionado" resourceKey="Senalizacion" controller="CodigoSeleccionado" action="CodigoSeleccionado" />
+      <siteMapNode id="SE14" title="Artículos Exhibición" resourceKey="Senalizacion" controller="Etiquetas" action="ArticulosExhibicion" />
+      <siteMapNode id="SE15" title="Etiquetas de Insertos" resourceKey="Senalizacion" controller="Etiquetas" action="Insertos" />
+    </siteMapNode>
+    <siteMapNode id="SE2" title="Impresion" resourceKey="Senalizacion" controller="Menu" action="Index">
+      <siteMapNode id="SE21" title="Impresión de Etiquetas" resourceKey="Senalizacion" controller="Impresion" action="Igualaciones" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMapNode>
+
+

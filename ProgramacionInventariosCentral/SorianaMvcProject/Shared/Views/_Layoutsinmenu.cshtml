@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Soriana | @Session["App"]</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+    @*<link rel="shortcut icon" href="@Url.Content("~/images/favicon.ico(or ico?)")" type="image/x-icon" />*@
+
+    <!-- Add local styles, mostly for plugins css file -->
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+
+    <!-- Add jQuery Style direct - used for jQGrid plugin -->
+    <link href="@Url.Content("~/Scripts/plugins/jquery-ui/jquery-ui.css")" rel="stylesheet" type="text/css" />
+
+    <!-- Primary Inspinia style -->
+    <link href="@Url.Content("~/fonts/font-awesome/css/font-awesome.css")" rel="stylesheet" />
+    @Styles.Render(@Url.Content("~/Content/css"))
+    
+    
+</head>
+@*<body class="top-navigation pace-running pace-running pace-running pace-running" onload="UsuarioPerfiles();">*@
+<body class="top-navigation pace-running pace-running pace-running pace-running">
+
+
+    <!-- Skin configuration box -->
+    @*@Html.Partial("_SkinConfig")*@
+
+    <!-- Wrapper-->
+    <!-- PageClass give you ability to specify custom style for specific view based on action -->
+    <div id="wrapper" class="@Html.PageClass()">
+
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar3")
+           
+            <!-- Main view  -->
+            @RenderBody()
+
+            <!-- Footer -->
+            @Html.Partial("_Footer")
+
+        </div>
+        <!-- End page wrapper-->
+
+    </div>
+    <!-- End wrapper-->
+    <!-- Modal Loggin -->
+
+    <div class="modal fade" id="modalValidaPermiso" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title"> Señalización</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @*<img src="~/Images/Soriana.png" width="280px" />*@
+                        <div class="alert alert-warning alert-dismissible" role="alert" id="noAccesModalLogin"></div>
+                        <div class="form-group">
+                            <input type="text" id="txtUsuarioModal" name="txtUsuarioModal" class="form-control" placeholder="Usuario" required="">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" id="txtPasswordModal" name="txtPasswordModal" class="form-control" placeholder="contraseña" required="">
+                        </div>
+                        @*<button type="submit" class="btn btn-primary block full-width m-b">Login</button>*@
+                        <div class="col-lg-12">
+                            <div class="hr-line-dashed"></div>
+
+                            <label id="lblLLamadoOriginalOk" style="display:none;"></label>
+                            <label id="lblBtnAValidar" style="display:none;"></label>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="col-lg-8 text-left"></div>
+                            <div class="col-lg-2 text-left">
+                                <a class="btn navy-bg " name="btnOkModalAcces" href="javascript:PermisoAccion();">
+                                    Aceptar
+                                </a>
+                            </div>
+                            <div class="col-lg-2 text-left">
+                                <a class="btn navy-bg-danger" data-dismiss="modal">
+                                    Cerrar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<div class="modal"><!-- Place at bottom of page --></div>
+<!-- Section for main scripts render -->
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/plugins/slimScroll")
+@Scripts.Render("~/bundles/inspinia")
+@Scripts.Render("~/plugins/bootbox")
+
+<!-- Skin config script - only for demo purpose-->
+@Scripts.Render("~/bundles/skinConfig")
+
+<!-- Handler for local scripts -->
+@RenderSection("scripts", required: false)
+
+<script>
+    @*function optionSelected_onkeydown(e) {
+        var valueOption = $("#optionSelected").val();
+
+        if (e.which == 27) {
+
+
+        }
+        else {
+            //enter
+            if (e.which == 13) {
+
+                $.ajax({
+                    cache: false,
+                    type: 'GET',
+                    datatype: 'html',
+                    url: '@Url.Action("RedirectOption", "Menu")',
+                    data: {
+                        option: valueOption,
+                    },
+                    success: function (data) {
+                        debugger;
+                         if (data.Success == true) {
+                            window.location.href = data.datos.url;
+                        } else {
+                            //  bootbox.alert(data.Message);
+                            alert(data.Message);
+                        }
+                    }
+        ,
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+
+                });
+
+            }
+        }
+    }*@
+
+    function optionSelected_onkeydown(e) {
+        var valueOption = $("#optionSelected").val();
+
+        if (e.which == 27) {
+
+
+        }
+        else {
+            //enter
+            if (e.which == 13) {
+
+                $.ajax({
+                    cache: false,
+                    type: 'GET',
+                    datatype: 'html',
+                    url: '@Url.Action("RedirectOption", "Menu")',
+                    data: {
+                        option: valueOption,
+                    },
+                    success: function (data) {
+                        debugger;
+                        if (data.Success == true) {
+                            window.location.href = data.datos.url;
+                        } else {
+                            //  bootbox.alert(data.Message);
+                            alert(data.Message);
+                        }
+                    }
+        ,
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+
+                });
+
+            }
+        }
+    }
+</script>
+<script language="javascript">
+    function validaPermiosBotones(nombreBoton) {
+        var permiso = false;
+        $.ajax({
+            cache: false,
+            type: 'GET',
+            datatype: 'html',
+            url: '@Url.Action("validaPermiosBotones", "Menu")',
+            data: {
+                nombreBoton: nombreBoton,
+            },
+            success: function (data) {
+                debugger;
+                if (data.Success == false) {
+                    document.getElementById("noAccesModalLogin").innerHTML = data.Message;
+                    $("#noAccesModalLogin").show();
+                }
+                else {
+                    if (data.Message == "OK") {
+                        permiso = true;
+                    }
+                    else if (data.Message == "NO") {
+                        permiso = false;
+                    }
+                    else {
+                        var url = data.urlRedirect;
+                        window.location.href = url;
+                    }
+                }
+
+            }
+        ,
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+
+        });
+        return permiso;
+    }
+</script>
+<script language="javascript">
+    function PermisoAccion() {
+        var usuario = $("#txtUsuarioModal").val();
+        var password = $("#txtPasswordModal").val();
+        var nombreBoton =  document.getElementById("lblBtnAValidar").innerHTML;
+        debugger;
+        var accesoValido = false;
+        $.ajax({
+            cache: false,
+            type: 'GET',
+            datatype: 'html',
+            url: '@Url.Action("PermisoAccion", "Menu")',
+            data: {
+                usuario: usuario,
+                password: password,
+                nombreBoton: nombreBoton
+            },
+            success: function (data) {
+
+                if (data.Success == false) {
+                    document.getElementById("noAccesModalLogin").innerHTML = data.Message;
+                    $("#noAccesModalLogin").show();
+                }
+
+                else {
+                    if (data.Message == "OK") {
+                        //  accesoValido = true;
+                        var codeToExecute = document.getElementById("lblLLamadoOriginalOk").innerHTML;
+                        var tmpFunc = new Function(codeToExecute);
+                        tmpFunc();
+                    }
+                    else if (data.Message == "NO") {
+                        document.getElementById("noAccesModalLogin").innerHTML = "Nivel de usuario no es permitido.";
+                        $("#noAccesModalLogin").show();
+                    }
+                    else {
+                        var url = data.urlRedirect;
+                        window.location.href = url;
+                    }
+                }
+
+            }
+        ,
+            error: function (jqXHR, textStatus, errorThrown) {
+
+                alert(errorThrown);
+            }
+
+        });
+        //return permiso;
+    }
+</script>
+@*Mensaje de error view bag / inicio botones*@
+<script>
+    $(function () {
+        if ("@ViewBag.Error" != null & "@ViewBag.Error" != "") {
+            bootbox.alert("@ViewBag.Error");
+        }
+    });
+</script>
+@*SOLO NUMEROES ONKEYPRESS*@
+<script type="text/javascript">
+        function isNumber(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && charCode < 48) || charCode > 57) {
+                return false;
+            }
+            return true;
+        }
+
+
+</script>
+
+<style>
+    /* Start by setting display:none to make this hidden.
+        Then we position it in relation to the viewport window
+        with position:fixed. Width, height, top and left speak
+        for themselves. Background we set to 80% white with
+        our animation centered, and no-repeating */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba( 255, 255, 255, .8 ) 
+        url('http://i.stack.imgur.com/FhHRx.gif') 
+        50% 50% no-repeat;
+    }
+
+    /* When the body has the loading class, we turn
+        the scrollbar off with overflow:hidden */
+    body.loading {
+        overflow: hidden;
+    }
+
+    /* Anytime the body has the loading class, our
+    modal element will be visible */
+    body.loading .modal {
+        display: block;
+    }
+</style>
+<script type="text/javascript">
+    $body = $("body");
+
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+</script>

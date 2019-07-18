@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Shared/Views/_Layout_Login.cshtml";
+}
+
+<div class="row">
+
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-6">
+
+        <div class="ibox-content">
+            <img src="~/Images/Soriana.png" width="280px" />
+            <form class="m-t" role="form" method="get" action="@Url.Action("Comprobar", "Menu")">
+                <div class="form-group">
+                    @{  if (@Session["Nombre"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @Session["Nombre"]
+                            </div>
+                        }
+                    }
+                    <input type="text" name="usuario" class="form-control" placeholder="Usuario" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control" placeholder="contraseña" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a href="#">
+                    <small>Forgot password?</small>
+                </a>
+
+
+            </form>
+            <p class="m-t text-center">
+                <small>Bienvenidos a Soriana &copy; 2017</small>
+            </p>
+        </div>
+    </div>
+</div>
+

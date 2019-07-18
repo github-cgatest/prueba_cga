@@ -1,0 +1,21 @@
+Tienda,Nombre,Formato,Tipo de Inventario,PROVEEDOR,CATEGORÍA,LINEA,CODIGO,Frecuencia de inventario,Fecha Inicial ,Fecha Fin
+12,San Nicolás,Híper,ROT,5462,,,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,7654,,,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,5432,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,5462,7654,,,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,5462,,5432,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,12345,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,,12376,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,123762,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,,812735,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,,UNI,06/03/2019,06/03/2019
+12,San Nicolás,Híper,ROT,,,,,SEM,06/03/2019,02/09/2019
+12,San Nicolás,Híper,ROT,,,,,UNI,06/03/2019,06/03/2019

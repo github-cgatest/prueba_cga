@@ -1,0 +1,389 @@
+﻿@{
+    ViewBag.Title = "ProgramaInventario";
+    Layout = "~/Shared/Views/_Layoutsinmenu.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <br />
+                        <h2 style="margin-top: 5px;">
+                            <a href="@Url.Action("Index", "Menu")" class="btn btn-default btn-circle btn-lg"><i class="fa fa-reply"></i></a> Programa Inventario
+                        </h2>
+                        <div class="panel panel-default" style="padding-left: 10px;padding-right:10px;">
+                            <div class="row" style="padding-top:10px">
+
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Tipo Inventario: </label>
+                                    <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                                        @*@Html.DropDownList("TipoInv", (SelectList)ViewData["ddlTipoInv"], new { @id = "ddlTipoInv", @class = "form-control" })*@
+                                        <select class="form-control">
+                                                <option value="volvo">Semestral</option>
+                                                <option value="saab">Mensual</option>
+                                                <option value="mercedes">General</option>
+                                            </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Tienda: </label>
+                                    <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                                        @Html.DropDownList("Tienda", (SelectList)ViewData["ddlTiendas"], new { @id = "ddlTiendas", @class = "selectpicker form-control ", data_live_search = "true", @style = "color:red;" })
+                                        @*<select class="form-control">
+                                                <option value="volvo">1 SANTO DOMINGO</option>
+                                                <option value="saab">2 SAN ISIDRO</option>
+                                            </select>*@
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                    <label style="padding-left: 20px;padding-right: 25px;">Consecutivo: </label>
+                                    <div class="form-group col-lg-12">
+                                        @Html.TextBox("txtConsecutivo", ViewData["ddlConsecutivo"], new { id = "Consecutivo", @class = "form-control", @placeholder = "", @style = "padding-left: 25px;padding-right: 25px;", disabled = "disabled" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-top:10px">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Fecha Inicial: </label>
+                                    <div class="input-group date" style="padding-left: 25px;padding-right: 25px;" id="dtp1">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="txtFechaInicial" class="form-control" disabled="disabled" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Año: </label>
+                                    <div class="dropdown" style="padding-left: 25px;padding-right: 25px;">
+                                        <select class="form-control" id="anio">
+                                            @*<option value="volvo">2018</option>
+                                                <option value="saab">2019</option>
+                                                <option value="mercedes">2020</option>*@
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                    <br />
+                                    <a class="btn btn-danger" style="margin-left: 15%;" href="javascript: Grabar();" target="_self"><i class="fa fa-save"></i> Grabar</a>
+                                </div>
+                            </div>
+
+                            <div class="row" style="padding-top:10px">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Fecha Final: </label>
+                                    <div class="input-group date" id="dtp2" style="padding-left: 25px;padding-right: 25px;">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" id="txtFechaFinal" class="form-control" disabled="disabled" value="">
+                                        @*<input type="text" class="input-sm form-control" name="start" />
+                                            <span class="input-group-addon">A</span>
+                                            <input type="text" class="input-sm form-control" name="end" />*@
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                    <label style="padding-left: 25px;padding-right: 25px;">Alcance: </label>
+                                    <br />
+                                    @Html.RadioButton("Opc_IndicaConsiderax", "1", true, new { id = "AlcanceDep", @style = "padding-left: 25px;padding-right: 25px;margin-left: 9%;" })<label> Departamento </label>
+                                    <br />
+                                    @Html.RadioButton("Opc_IndicaConsiderax", "2", false, new { id = "AlcanceCat", @style = "padding-left: 25px;padding-right: 25px;margin-left: 9%;" })<label> Categoria </label>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row" id="gridFolios" style="padding-top:2%;">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div id="table-scroll">
+                                        <input type="hidden" id="hddIdLinea" />
+                                        <table id="tabla" class="table table-striped table-bordered table-hover dataTables-example gvv" style="overflow: scroll">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center small">Tienda</th>
+                                                    <th class="text-center small">Nombre de la Tienda</th>
+                                                    <th class="text-center small">Alcance</th>
+                                                    <th class="text-center small">Fecha Inicio</th>
+                                                    <th class="text-center small">Fecha Fin</th>
+                                                    <th class="text-center small">Tipo Alcance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    @*<td style="text-align:right"><label class="label label-default" style="background-color:inherit;">687</label></td>
+                                                        <td><label class="label label-default" style="background-color: inherit;">SALINAS VICTORIA</label></td>
+                                                        <td><label class="label label-default" style="background-color: inherit;">DEPARTAMENTO</label></td>
+                                                        <td style="text-align:center"><label class="label label-default" style="background-color:inherit;">11-MAY-2018</label></td>
+                                                        <td style="text-align:center"><label class="label label-default" style="background-color: inherit;">11-MAY-2018</label></td>
+                                                        <td><label class="label label-default" style="background-color:inherit;">ALCANCE</label></td>*@
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+    @Scripts.Render("~/plugins/flot")
+    @Scripts.Render("~/plugins/chartJs")
+    @Scripts.Render("~/plugins/peity")
+    @Scripts.Render("~/plugins/dataTables")
+    @Styles.Render("~/plugins/clockpickerStyles")
+    @Styles.Render("~/plugins/datapickerStyles")
+    @Scripts.Render("~/plugins/dataPicker")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$(".date").datepicker('setDate', new Date());
+            //('select').selectpicker();
+
+            //Llenar Select Año
+            //***********************************
+            var now = new Date();
+            var year = now.getFullYear() - 2;
+            for (i = year; i <= now.getFullYear() + 3; i++) {
+                $('#anio').append($('<option>', {
+                    value:i,
+                    text: i
+                }));
+            }
+            $("#anio").val(now.getFullYear());
+            //*************************************
+            $('select').selectpicker();
+
+            $(".dropdown-menu").css("color", "black");
+            LlenarGrid();
+        });
+    </script>
+
+    <script>
+
+        $('#dtp1').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            //calendarWeeks: true,
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            startDate: "dateToday"
+        });
+
+        /*$("#txtFechaInicial").on("dp.change", function (e) {
+            //$('#txtFechaFinal').data('DateTimePicker').minDate(new Date(e.timeStamp));
+            debugger;
+            bootbox.alert("sasdsjk");
+        });*/
+    </script>
+
+    <script>
+
+        $(function () {
+            $('#txtFechaInicial').datepicker();
+            $('#txtFechaFinal').datepicker  ({
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#txtFechaInicial").on("change", function (e) {
+               // alert(this.value);
+                // $('#txtFechaFinal').data("DateTimePicker").minDate(e.date);
+                var from = $("#txtFechaInicial").val().split('/');
+                $('#dtp2').datepicker({
+                    todayBtn: "linked",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    autoclose: true,
+                    format: 'dd/mm/yyyy',
+                    minDate: new Date($("#txtFechaInicial").val()),
+                    startDate: new Date(from[2], from[1],parseInt(from[0])+1)
+                });
+            });
+
+            $("#txtFechaFinal").on("change", function (e) {
+                //$('#txtFechaInicial').data("DateTimePicker").maxDate(e.date);
+                //if ($("#txtFechaFinal").val() != "") {
+                //    if ($("#txtFechaFinal").val() <= $("#txtFechaInicial").val()) {
+                //        bootbox.alert('La fecha debe ser mayor al inicio');
+                //        $("#txtFechaFinal").val("");
+                //    }
+                //}
+                //$("#txtFechaFinal").datepicker({
+                //    maxDate: new Date(this.value),
+                //});
+            });
+
+        });
+
+    </script>
+
+    <script>
+        $("#ddlTiendas").change(function () {
+
+                var SelectedValue = $(this).val();
+                if (SelectedValue > 0)
+                {
+                    @*$.ajax({
+                        "url": "@Url.Action("LlenaComboTipoMovimiento", "Captura")",
+                        "type": "GET",
+                        "dataType": "json",
+                        "data": { "tipoMov": SelectedValue },
+                        "success": function (GpoCategorias) {
+                            $("#ddlTipoMovimiento").removeAttr("disabled");
+                            $("#ddlTipoMovimiento").html(""); // clear before appending new list
+                            //$("#ddlTipoMovimiento").append($('<option></option>').val("0").html(""));
+                            $.each(GpoCategorias, function (i, tip) {
+                                $("#ddlTipoMovimiento").append(
+                                    $('<option></option>').val(tip.Id).html(tip.Desc));
+                            });
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            debugger;
+                            bootbox.alert('Failed to retrieve states.');
+                            DesHabilitarCombos(1);
+                        }
+                    });*@
+                }
+
+            });
+
+    </script>
+
+    <script>
+        function Grabar() {
+            if (ValidarCamposVacios()) {
+                debugger;
+                var _TipoInv = $("#ddlTipoInv").val();
+                var _Anio = $("#anio").val();
+                var _Cons = $('#Consecutivo').val();
+                var _FechaIn = $("#txtFechaInicial").val();
+                var _FechaFin = $("#txtFechaFinal").val();
+                var _Tienda = $("#ddlTiendas").val();
+                var _Alcance = $("#AlcanceDep").is(":checked") == true ? 1 : 2;
+                $.ajax({
+                    type: 'GET',
+                    datatype: 'json',
+                    url: '@Url.Action("GuardarProgramaInventario", "Capturas")',
+                    data: {
+                        TipoInv: _TipoInv,
+                        Anio: _Anio,
+                        Cons: _Cons,
+                        FechaIn: _FechaIn,
+                        FechaFin: _FechaFin,
+                        Tienda: _Tienda,
+                        Alcance: _Alcance
+                    },
+                    success: function (data) {
+                        if (data.id == "Ok")
+                        {
+                            //Recarga Grid y limpia campos
+                            //window.location.reload(true);
+                            //LlenarGrid();
+                        }
+                        bootbox.alert(data.message);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        debugger;
+                        alert(errorThrown);
+                    }
+                });
+            }
+        }
+
+        function ValidarCamposVacios() {
+
+            debugger;
+            var pasa = false;
+            var campo = "#ddlTipoInv";
+            //alert(campo);
+            if($("#ddlTipoInv").val() != -1)
+            {
+                campo = "#Consecutivo";
+                if($("#Consecutivo").val() != "")
+                {
+                    campo = "#txtFechaInicial";
+                    if ($("#txtFechaInicial").val() != "")
+                    {
+                        campo = "#txtFechaFinal";
+                        if ($("#txtFechaFinal").val() != "")
+                        {
+                            campo = "#ddlTiendas";
+                            if ($("#ddlTiendas").val() != -1)
+                            {
+                                pasa = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if (!pasa)
+            {
+                bootbox.alert("Debe completar todos los campos");
+                $(campo).focus();
+            }
+            return pasa;
+        }
+
+        function LlenarGrid() {
+            $.ajax({
+                "url": "@Url.Action("LlenarListaInventarios", "Capturas")",
+                "type": "GET",
+                "dataType": "json",
+                "success": function (data) {
+                    $("#tabla tbody").empty()
+                    if (data.length != 0) {
+                        var nextRowID = 0;
+                        $.each(data, function (index, row) {
+                            //AddRow(row.Ids_Num_Un, row.Desc_UN, row.Desc_Tipo_Alc, row.Fecx_IniInv, row.Fecx_FinInv, row.Alcance);
+                            nextRowID = nextRowID + 1;
+                            //alert(row.Fecx_IniInv);
+                            $('#tabla').append
+                            (
+                                '<tr id=\'row' + nextRowID + '\'>' +
+                                    '<td>' + row.Ids_Num_Un + '</td>' +
+                                    '<td>' + row.Desc_UN + '</td>' +
+                                    '<td>' + row.Desc_Tipo_Alc + '</td>' +
+                                    '<td>' + row.Fecx_IniInv + '</td>' +
+                                    '<td>' + row.Fecx_FinInv + '</td>' +
+                                    '<td>' + row.Alcance + '</td>' +
+                                '</tr>'
+                            );
+                        })
+                    }
+                    else {
+                        bootbox.alert("No hay datos disponibles");
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    bootbox.alert("Error de carga de combo");//;errorThrown);
+                }
+            });
+        }
+    </script>
+
+    <script>
+            var nextRowID = 0;
+            function AddRow( Ids_Num_Un,  Desc_UN,  Desc_Tipo_Alc,  Fecx_IniInv,  Fecx_FinInv,  Alcance) {
+                nextRowID = nextRowID + 1;
+                $('#tabla').append('<tr id=\'row' + nextRowID + '\'>' +
+                                    '<td>' + Ids_Num_Un + '</td>' +
+                                    '<td>' + Desc_UN + '</td>' +
+                                    '<td>' + Desc_Tipo_Alc + '</td>' +
+                                    '<td>' + Fecx_IniInv + '</td>' +
+                                    '<td>' + Fecx_FinInv + '</td>' +
+                                    '<td>' + Alcance + '</td>' +
+                                    '</tr>');
+            }
+    </script>
+
+}
